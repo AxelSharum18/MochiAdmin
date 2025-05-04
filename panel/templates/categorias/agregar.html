@@ -1,0 +1,36 @@
+{% extends '../index_master.html' %}
+{% block content %}
+
+<div class="right_col" role="main">
+<div class="container mt-5">
+  <h2>Agregar Categoría</h2>
+  <form method="POST">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input id="nombre" name="nombre" type="text" required class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" name="descripcion" rows="3" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="color">Color</label>
+      <input id="color" name="color" type="color" value="#6c757d" class="form-control" style="width: 100px;">
+    </div>
+
+    <div class="form-group">
+      <label for="icono">Icono (opcional)</label>
+      <input id="icono" name="icono" type="text" placeholder="Ej: fa-solid fa-box" class="form-control">
+      <small class="form-text text-muted">Usa clases de Font Awesome. Ej: <code>fa-solid fa-tag</code></small>
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a href="{% url 'categorias' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'index_master.html' %}
+{% block content %}
+
+<div class="right_col" role="main">
+    <div class="container-add">
+        <div class="">
+            <h1>Productos</h1>
+            <div>
+                <a href="agregar" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Agregar Nuevo Producto
+                </a>
+                <a href="{%url 'export_csv'%}" class="btn btn-outline-secondary">
+                    <i class="bi bi-download"></i> Exportar CSV
+                </a>
+            </div>
+        </div> 
+    </div>
+    <div class="col-md-12 mb-3">
+      <form method="get" class="form-inline">
+        <input type="text" name="buscar" class="form-control" placeholder="Buscar producto..." value="{{ buscar }}">
+        <button type="submit" class="btn btn-primary ml-2">Buscar</button>
+      </form>
+    </div>
+    <table class="table border-secondary">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for p in productos %}
+          <tr>
+            <td>{{ p.nombre}}</td>
+            <td>{{ p.descripcion}}</td>
+            <td>
+           S/.{{ p.precio}}
+        </td>
+            <td>
+              {{ p.stock }}
+            </td>
+            <td>
+              {{ p.categoria }}
+            </td>
+            <td> <a href="{% url 'editar' p.id %}" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                <a href="{% url 'eliminar' p.id %}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+
+{% endblock %}

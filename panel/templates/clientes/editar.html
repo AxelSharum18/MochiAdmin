@@ -1,0 +1,58 @@
+{% extends '../index_master.html' %}
+
+{% block content %}
+
+<div class="right_col" role="main">
+
+    <div class="container mt-5">
+        <h2>Editar Cliente</h2>
+        <form method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="nombre">Nombre</label> 
+            <input id="nombre" name="nombre" type="text" value="{{ cliente.nombre }}" required class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="correo">Correo</label> 
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fa fa-envelope"></i></div>
+              </div> 
+              <input id="correo" name="correo" type="email" value="{{ cliente.email }}" required class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="telefono">Teléfono</label> 
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fa fa-phone"></i></div>
+              </div> 
+              <input id="telefono" name="telefono" type="text" value="{{ cliente.telefono }}" required class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="direccion">Dirección</label> 
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fa fa-map-marker"></i></div>
+              </div> 
+              <input id="direccion" name="direccion" type="text" value="{{ cliente.direccion }}" required class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <button name="submit" type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a href="{% url 'clientes' %}" class="btn btn-secondary">Cancelar</a>
+          </div>
+        </form>
+      </div>
+
+
+
+
+
+
+
+
+</div>
+
+{% endblock %}

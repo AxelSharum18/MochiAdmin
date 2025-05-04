@@ -1,0 +1,39 @@
+{% extends '../index_master.html' %}
+{% block content %}
+
+<div class="right_col" role="main">
+
+<div class="container mt-5">
+  <h2>Editar Categoría</h2>
+  <form method="POST">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input id="nombre" name="nombre" type="text" value="{{ categoria.nombre }}" required class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" name="descripcion" rows="3" class="form-control">{{ categoria.descripcion }}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="color">Color</label>
+      <input id="color" name="color" type="color" value="{{ categoria.color }}" class="form-control" style="width: 100px;">
+    </div>
+
+    <div class="form-group">
+      <label for="icono">Icono</label>
+      <input id="icono" name="icono" type="text" value="{{ categoria.icono }}" class="form-control">
+      <small class="form-text text-muted">Usa clases de Font Awesome.</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a href="{% url 'categorias' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+
+</div>
+{% endblock %}
+

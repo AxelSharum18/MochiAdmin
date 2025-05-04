@@ -1,0 +1,48 @@
+{% extends 'index_master.html' %}
+
+{% block content %}
+<div class="right_col" role="main">
+  <div class="container-add">
+    <div class="">
+      <h1>Ventas</h1>
+      <div>
+        <a href="{% url 'agregarVe' %}" class="btn btn-primary">
+          <i class="bi bi-plus-circle"></i> Registrar Nueva Venta
+        </a>
+      </div>
+    </div>
+</div>
+
+  <table class="table border-secondary">
+    <thead>
+      <tr>
+        <th scope="col">Cliente</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Total</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for venta in ventas %}
+      <tr>
+        <td>{{ venta.cliente.nombre }}</td>
+        <td>{{ venta.fecha|date:"d/m/Y H:i" }}</td>
+        <td>S/. {{ venta.total }}</td>
+        <td>
+            <a href="{% url 'generar_factura' venta.id %}" class="btn btn-sm btn-success">
+                <i class="fa fa-file-pdf-o"></i> PDF
+              </a>
+              <a href="{% url 'eliminar_venta' venta.id %}" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta venta?')">
+                <i class="bi bi-trash"></i> Eliminar
+            </a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" class="text-center">No se encontraron ventas.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

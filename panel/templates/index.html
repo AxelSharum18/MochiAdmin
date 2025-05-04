@@ -1,0 +1,109 @@
+{% extends 'index_master.html' %}
+
+{% block content %}
+
+    <!-- page content -->
+  <div class="right_col" role="main">
+    <h3>Dashboard</h3>
+    <div class="container mt-4">
+        <div class="row text-center">
+            <!-- Total de Productos -->
+            <div class="col-md-3">
+                <div class="card custom-card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Productos</h5>
+                        <p class="card-text" style="font-size: 1.6rem; font-weight: 600;">{{ total_productos }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ventas del Mes -->
+            <div class="col-md-3">
+                <div class="card bg-primary text-white mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Ventas del Mes</h5>
+                        <p class="card-text" style="font-size: 1.6rem; font-weight: 600;">S/. {{ ventas_del_mes }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Total de Stock -->
+            <div class="col-md-3">
+                <div class="card bg-warning text-white mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Stock Total</h5>
+                        <p class="card-text" style="font-size: 1.6rem; font-weight: 600;">{{ total_stock }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total de Ventas -->
+            <div class="col-md-3">
+                <div class="card bg-success text-white mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Ventas</h5>
+                        <p class="card-text" style="font-size: 1.6rem; font-weight: 600;">S/. {{ total_ventas }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <!-- Gráfico Ventas por Mes -->
+            <div class="col-md-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="ventasPorMes" style="height: 400px;"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabla de Ventas Recientes -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Ventas Recientes</h4>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table table-bordered text-center">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Fecha</th>
+                                    <th>Total</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for venta in ventas_recientes %}
+                                <tr>
+                                    <td>{{ venta.cliente.nombre }}</td>
+                                    <td>{{ venta.fecha|date:"d/m/Y H:i" }}</td>
+                                    <td>S/. {{ venta.total }}</td>
+                                    <td>
+                                        <a href="{% url 'generar_factura' venta.id %}" class="btn btn-sm btn-success">
+                                            <i class="fa fa-file-pdf-o"></i> PDF
+                                        </a>
+                                        <a href="{% url 'eliminar_venta' venta.id %}" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-trash"></i> Eliminar
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center">No se encontraron ventas.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+  </div>
+        <!-- /page content -->
+{% endblock %}

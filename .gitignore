@@ -1,0 +1,11 @@
+
+db.sqlite3
+
+__pycache__/
+
+
+venv/
+env/
+ENV/
+admin/Lib/
+admin/Scripts/

@@ -21,7 +21,7 @@ urlpatterns = [
    path('cliente/',views.listarClientes, name="clientes"),
    path('cliente/agregar',views.agregarCli, name="agregarCli"),
    path('cliente/editar/<int:id>/',views.editarCli, name="editarCli"),
-   path('cliente/delete/<int:id>/',views.editarCli, name="eliminarCli"),
+   path('cliente/delete/<int:id>/',views.eliminarCli, name="eliminarCli"),
    #Ventas
    path('ventas/',views.listarVentas, name="ventas"),
    path('ventas/agregar',views.agregar_venta,name = "agregarVe"),
